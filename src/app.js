@@ -1,5 +1,7 @@
 const http = require('http');
 
+const port = process.env.PORT || 8080;
+
 /** search for a given parameter and send the response */
 function inquire(req, res) {
     res.writeHead(200);
@@ -21,10 +23,10 @@ http.createServer((req, res) => {
         'default': noResponse
     };
     // parse the url by using WHATWG URL API
-    let reqUrl = new URL(req.url, 'http://127.0.0.1');
+    let reqUrl = new URL(req.url, 'http://127.0.0.1/');
     // find the related function by searching "method + pathname" and run it
     let redirectedFunc = funcRedirect[req.method + reqUrl.pathname] || funcRedirect['default'];
     redirectedFunc(req, res);
-}).listen(8080);
+}).listen(port);
 
-console.log('Server is running at http://127.0.0.1:8080/');
+console.log('Server is running at port:', port);
