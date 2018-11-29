@@ -2,9 +2,9 @@
   "name": "sem-cli-server",
   "version": "1.0.0",
   "description": "server side of semantic command line tool",
-  "main": "src/app.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -12,10 +12,13 @@
     "url": "git+https://github.com/hcoz/sem-cli-server.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "hco",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/hcoz/sem-cli-server/issues"
   },
-  "homepage": "https://github.com/hcoz/sem-cli-server#readme"
+  "homepage": "https://github.com/hcoz/sem-cli-server#readme",
+  "dependencies": {
+    "pg": "^7.6.1"
+  }
 }
