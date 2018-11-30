@@ -43,7 +43,7 @@ async function inquire(req, res, reqUrl) {
         method: 'GET',
         path: '/message' + reqUrl.search,
         headers: {
-            'Authorization': require('../credentials.json').wit
+            'Authorization': process.env.WITAI_ACCESS_TOKEN
         }
     };
 
