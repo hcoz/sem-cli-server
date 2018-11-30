@@ -1,6 +1,6 @@
 const https = require('https');
 
-const dbQuery = require('./db-query');
+const { search } = require('./db-query');
 
 /** send request to wit.ai to find message intent */
 function inquireWit(options) {
@@ -27,7 +27,7 @@ function inquireWit(options) {
         });
 
         witReq.on('error', (e) => {
-            console.log('problem with request: ' + e.message);
+            console.error('wit.ai error: ' + e.message);
             reject(e.message);
         });
 
@@ -43,22 +43,23 @@ async function inquire(req, res, reqUrl) {
         method: 'GET',
         path: '/message' + reqUrl.search,
         headers: {
-            'Authorization': process.env.WITAI_ACCESS_TOKEN
+            'Authorization': require('../credentials.json').wit
         }
     };
 
     try {
         let intent = await inquireWit(options);
-        let command = await dbQuery.search(intent.value, reqUrl.searchParams.get('os'));
+        let command = await search(intent.value, reqUrl.searchParams.get('os'));
         // send the response
         res.writeHead(200);
-        res.write('your command: ' + JSON.stringify(command));
+        res.write(JSON.stringify(command));
         res.end();
     } catch (err) {
         console.error(err);
         // send the response
         res.writeHead(400);
-        res.write('error occured: ' + err);
+        console.error(JSON.stringify(err));
+        res.write('error occured');
         res.end();
     }
 }
