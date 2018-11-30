@@ -1,10 +1,12 @@
 const { Client } = require('pg');
 
+const constants = require('./constants.json');
+
 /** query the database for a related command */
 function search(intent, os) {
     return new Promise((resolve, reject) => {
         if (!intent || !os) {
-            reject('missing parameter');
+            reject(constants.MISSING_PARAM);
             return;
         }
 
@@ -31,7 +33,7 @@ function search(intent, os) {
 function insert(intent, command, os, dangerLevel) {
     return new Promise((resolve, reject) => {
         if (!intent || !command || !os || !dangerLevel) {
-            reject('missing parameter');
+            reject(constants.MISSING_PARAM);
             return;
         }
 

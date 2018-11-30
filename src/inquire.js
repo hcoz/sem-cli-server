@@ -1,6 +1,7 @@
 const https = require('https');
 
 const { search } = require('./db-query');
+const constants = require('./constants.json');
 
 /** send request to wit.ai to find message intent */
 function inquireWit(options) {
@@ -13,7 +14,7 @@ function inquireWit(options) {
                 let data = JSON.parse(chunk);
 
                 if (!data.entities || !data.entities.intent) {
-                    reject('no intent.');
+                    reject(constants.NO_RELATED_COMMAND);
                     witReq.end();
                     return;
                 }
@@ -27,7 +28,7 @@ function inquireWit(options) {
         });
 
         witReq.on('error', (e) => {
-            console.error('wit.ai error: ' + e.message);
+            console.error(constants.WITAI_ERROR + e.message);
             reject(e.message);
         });
 
@@ -59,7 +60,7 @@ async function inquire(req, res, reqUrl) {
         // send the response
         res.writeHead(400);
         console.error(JSON.stringify(err));
-        res.write('error occured');
+        res.write(constants.ERROR);
         res.end();
     }
 }

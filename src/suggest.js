@@ -1,4 +1,5 @@
 const { insert } = require('./db-query');
+const constants = require('./constants.json');
 
 /** add new suggested command */
 function suggest(req, res, reqUrl) {
@@ -10,14 +11,14 @@ function suggest(req, res, reqUrl) {
             await insert(data.intent, data.os, data.command, data.dangerLevel);
             // send the response
             res.writeHead(200);
-            res.write('your command is added');
+            res.write(constants.THANKS);
             res.end();
         } catch (err) {
             console.error(err);
             // send the response
             res.writeHead(400);
             console.error(JSON.stringify(err));
-            res.write('error occured');
+            res.write(constants.ERROR);
             res.end();
         }
     });
