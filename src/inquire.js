@@ -49,7 +49,7 @@ async function inquire(req, res, reqUrl) {
 
     try {
         let intent = await inquireWit(options);
-        let command = await dbQuery(intent.value, reqUrl.searchParams.get('os'));
+        let command = await dbQuery.search(intent.value, reqUrl.searchParams.get('os'));
         // send the response
         res.writeHead(200);
         res.write('your command: ' + JSON.stringify(command));

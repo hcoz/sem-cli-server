@@ -1,7 +1,7 @@
 const { Client } = require('pg');
 
 /** query the database for a related command */
-function dbQuery(intent, os) {
+function search(intent, os) {
     return new Promise((resolve, reject) => {
         if (!intent || !os) {
             reject('missing parameter');
@@ -28,4 +28,12 @@ function dbQuery(intent, os) {
     });
 }
 
-module.exports = dbQuery;
+/** insert a suggestion to the database */
+function insert(intent, command, os, dangerLevel) {
+    
+}
+
+module.exports = {
+    search: search,
+    insert: insert
+};
