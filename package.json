@@ -11,9 +11,12 @@
     "type": "git",
     "url": "git+https://github.com/hcoz/sem-cli-server.git"
   },
-  "keywords": [],
+  "keywords": [
+    "semantic",
+    "command line"
+  ],
   "author": "hco",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/hcoz/sem-cli-server/issues"
   },
