@@ -18,17 +18,23 @@ function inquireWit(options) {
                     witReq.end();
                     return;
                 }
+                // select the intent which has highest confidence value
                 for (let item of data.entities.intent) {
                     if (!item || item.confidence > intent.confidence) {
                         intent = item;
                     }
                 }
-                resolve(intent);
+                //if the confidence value of this intent lower than threshold return reject
+                if (intent.confidence < 0.9) {
+                    reject(constants.NO_RELATED_COMMAND);
+                } else {
+                    resolve(intent);
+                }
             });
         });
 
         witReq.on('error', (e) => {
-            console.error(constants.WITAI_ERROR + e.message);
+            console.error(constants.WITAI_ERROR, e.message);
             reject(e.message);
         });
 
