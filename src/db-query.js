@@ -12,7 +12,7 @@ function search(intent, os) {
 
         const client = new Client({
             connectionString: process.env.DATABASE_URL,
-            ssl: true
+            ssl: { rejectUnauthorized: true }
         });
 
         try {
@@ -38,7 +38,7 @@ function insert(intent, command, os, dangerLevel) {
 
         const client = new Client({
             connectionString: process.env.DATABASE_URL,
-            ssl: true
+            ssl: { rejectUnauthorized: true }
         });
 
         try {
