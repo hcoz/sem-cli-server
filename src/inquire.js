@@ -43,22 +43,20 @@ function inquireWit(options) {
 }
 
 /** search for a given parameter and send the response */
-async function inquire(req, res, reqUrl) {
+async function inquire({ res, reqUrl }) {
     // query wit.ai for requested message
     const options = {
         hostname: 'api.wit.ai',
         method: 'GET',
-        path: '/message' + reqUrl.search + '&v=20200313',
+        path: '/message' + reqUrl.search,
         headers: {
-            'Authorization': process.env.WITAI_ACCESS_TOKEN
+            'Authorization': 'Bearer ' + process.env.WITAI_ACCESS_TOKEN
         }
     };
 
     try {
         let intent = await inquireWit(options);
-        console.log('intent: ', intent);
         let command = await search(intent.value, reqUrl.searchParams.get('os'));
-        console.log('command: ', command);
         // send the response
         res.writeHead(200);
         res.write(JSON.stringify(command));

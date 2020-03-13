@@ -2,7 +2,7 @@ const { insert } = require('./db-query');
 const constants = require('./constants.json');
 
 /** add new suggested command */
-function suggest(req, res, reqUrl) {
+function suggest({ req, res }) {
     req.setEncoding('utf8');
     req.on('data', async (chunk) => {
         let data = JSON.parse(chunk);

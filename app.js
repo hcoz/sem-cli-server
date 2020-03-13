@@ -17,7 +17,7 @@ http.createServer((req, res) => {
     let reqUrl = new URL(req.url, 'http://127.0.0.1/');
     // find the related function by searching "method + pathname" and run it
     let redirectedFunc = router[req.method + reqUrl.pathname] || router['default'];
-    redirectedFunc(req, res, reqUrl);
+    redirectedFunc({ req, res, reqUrl });
 }).listen(port, () => {
     console.log('Server is running at port:', port);
 });
