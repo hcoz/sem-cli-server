@@ -48,7 +48,7 @@ async function inquire(req, res, reqUrl) {
     const options = {
         hostname: 'api.wit.ai',
         method: 'GET',
-        path: '/message' + reqUrl.search,
+        path: '/message' + reqUrl.search + '&v=20200313',
         headers: {
             'Authorization': process.env.WITAI_ACCESS_TOKEN
         }
