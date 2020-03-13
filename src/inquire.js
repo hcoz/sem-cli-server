@@ -56,7 +56,9 @@ async function inquire(req, res, reqUrl) {
 
     try {
         let intent = await inquireWit(options);
+        console.log('intent: ', intent);
         let command = await search(intent.value, reqUrl.searchParams.get('os'));
+        console.log('command: ', command);
         // send the response
         res.writeHead(200);
         res.write(JSON.stringify(command));
